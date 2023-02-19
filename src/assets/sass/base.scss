@@ -5,7 +5,16 @@
 .flex {
   display: flex;
 }
-
+.hidden {
+  display: none;
+}
+.block {
+  display: block;
+}
+.cursor-pointer {
+  cursor: pointer;
+  user-select: none;
+}
 .items-center {
   align-items: center;
 }
@@ -39,6 +48,9 @@
 .top-0 {
   top: 0;
 }
+.bottom-0 {
+  bottom: 0;
+}
 .left-0 {
   left: 0;
 }
@@ -64,7 +76,18 @@
   }
 }
 .border-b {
-  border-bottom: 1px solid $black;
+  border-bottom: 1px solid $light-gray;
+}
+.border-l {
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: -40px;
+    border-left: 1px solid $light-gray;
+  }
 }
 
 .text-bold {

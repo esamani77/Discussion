@@ -1,0 +1,4 @@
+{
+	"./**/*.{js,jsx,ts,tsx,json}": "yarn eslint --fix",
+	"./**/*.{js,jsx,ts,tsx,css,md,json}": "yarn prettier --write  --config ./.prettierrc"
+}

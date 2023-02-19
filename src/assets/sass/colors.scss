@@ -8,6 +8,7 @@ $light-gray-5: #1e1e1ee6;
 $black: #000000;
 $white: #ffffff;
 $primary: #2929ff;
+$primarylight: #769de4f8;
 
 @mixin syntax-colors($args...) {
   @debug meta.keywords($args);
@@ -22,7 +23,6 @@ $primary: #2929ff;
     .border-#{$name} {
       border-color: $color;
     }
-    
   }
 }
 
@@ -34,5 +34,6 @@ $primary: #2929ff;
   $black: #000000,
   $white: #ffffff,
   $primary: #2929ff,
-  $success: #008000
+  $success: #008000,
+  $primarylight: #7397d980
 );

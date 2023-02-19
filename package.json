@@ -1,28 +1,41 @@
 {
-  "name": "discussion",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
-  "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
-    "preview": "vite preview"
-  },
-  "dependencies": {
-    "@ckeditor/ckeditor5-build-balloon-block": "^36.0.1",
-    "@ckeditor/ckeditor5-react": "^5.0.6",
-    "@tanstack/react-query": "^4.24.6",
-    "@tanstack/react-query-devtools": "^4.24.6",
-    "iconsax-react": "^0.0.8",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "sass": "^1.58.1"
-  },
-  "devDependencies": {
-    "@types/react": "^18.0.27",
-    "@types/react-dom": "^18.0.10",
-    "@vitejs/plugin-react-swc": "^3.0.0",
-    "typescript": "^4.9.3",
-    "vite": "^4.1.0"
-  }
+	"name": "discussions",
+	"private": true,
+	"version": "0.0.0",
+	"type": "module",
+	"scripts": {
+		"dev": "vite",
+		"build": "tsc && vite build",
+		"preview": "vite preview",
+		"lint:fix": "eslint --fix './**/*.{js,jsx,ts,tsx,json}'",
+		"format": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc",
+		"prepare": "husky install src/.husky"
+	},
+	"dependencies": {
+		"@ckeditor/ckeditor5-build-balloon-block": "^36.0.1",
+		"@ckeditor/ckeditor5-react": "^5.0.6",
+		"@tanstack/react-query": "^4.24.6",
+		"@tanstack/react-query-devtools": "^4.24.6",
+		"iconsax-react": "^0.0.8",
+		"react": "^18.2.0",
+		"react-dom": "^18.2.0",
+		"sass": "^1.58.1"
+	},
+	"devDependencies": {
+		"@types/react": "^18.0.27",
+		"@types/react-dom": "^18.0.10",
+		"@vitejs/plugin-react-swc": "^3.0.0",
+		"typescript": "^4.9.3",
+		"vite": "^4.1.0",
+		"@typescript-eslint/eslint-plugin": "^5.30.6",
+		"eslint": "8.19.0",
+		"eslint-config-next": "12.2.2",
+		"eslint-config-prettier": "^8.5.0",
+		"eslint-import-resolver-typescript": "^3.3.0",
+		"eslint-plugin-import": "^2.26.0",
+		"eslint-plugin-prettier": "^4.2.1",
+		"husky": "^8.0.0",
+		"lint-staged": "^13.0.3",
+		"prettier": "^2.7.1"
+	}
 }

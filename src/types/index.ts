@@ -1,4 +1,4 @@
 export interface IModalBase {
-  showModal: boolean;
-  setShowModal: (val: boolean) => void;
+	showModal: boolean;
+	setShowModal: (val: boolean) => void;
 }
