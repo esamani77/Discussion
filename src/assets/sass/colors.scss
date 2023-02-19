@@ -1,0 +1,33 @@
+@use "sass:meta";
+
+$danger: #cf0000;
+$gray: #434343;
+$black: #000000;
+$white: #ffffff;
+$primary: #2929ff;
+
+@mixin syntax-colors($args...) {
+  @debug meta.keywords($args);
+
+  @each $name, $color in meta.keywords($args) {
+    .bg-#{$name} {
+      background-color: $color;
+    }
+    .text-#{$name} {
+      color: $color;
+    }
+    .border-#{$name} {
+      border-color: $color;
+    }
+  }
+}
+
+@include syntax-colors(
+  $danger: #cf0000,
+  $gray: #808080,
+  $black: #000000,
+  $white: #ffffff,
+  $primary: #2929ff,
+  $success: #008000,
+  $primarylight: #7397d980
+);

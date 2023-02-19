@@ -1,0 +1,128 @@
+@use "./colors" as *;
+@use "./fonts" as *;
+@use "./sizes" as *;
+
+.flex {
+  display: flex;
+}
+.hidden {
+  display: none;
+}
+.block {
+  display: block;
+}
+.cursor-pointer {
+  cursor: pointer;
+  user-select: none;
+}
+.items-center {
+  align-items: center;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.text-center {
+  text-align: center;
+}
+.w-screen {
+  width: 100vw;
+}
+.w-4 {
+  width: 4rem;
+}
+.flex-column {
+  flex-direction: column;
+}
+.flex-row {
+  flex-direction: row;
+}
+.absolute {
+  position: absolute;
+}
+.relative {
+  position: relative;
+}
+
+.top-0 {
+  top: 0;
+}
+.bottom-0 {
+  bottom: 0;
+}
+.left-0 {
+  left: 0;
+}
+
+.rounded-full {
+  border-radius: 100%;
+}
+
+.btn {
+  padding: 0.3rem 2rem;
+  border: 1px solid $gray;
+  cursor: pointer;
+
+  &.btn-primary {
+    background-color: $primary;
+    color: $white;
+    border-color: $primary;
+  }
+  &.btn-light {
+    background-color: $white;
+    color: $black;
+    border-color: $white;
+  }
+}
+.border-b {
+  border-bottom: 1px solid $light-gray;
+}
+.border-l {
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: -40px;
+    border-left: 1px solid $light-gray;
+  }
+}
+
+.text-bold {
+  font-weight: 800;
+}
+.input {
+  padding: 0.3rem 1.5rem;
+  border: 1px solid $gray;
+}
+
+.spin-animation {
+  animation-name: spin;
+  animation-duration: 1000ms;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.gap-2 {
+  grid-gap: 0.5rem; /* 8px */
+  gap: 0.5rem; /* 8px */
+}
+
+.flex-col {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+}

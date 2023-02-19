@@ -1,0 +1,85 @@
+@use "sass:meta";
+
+@mixin sizes($args...) {
+  @each $name, $size in meta.keywords($args) {
+    .text-#{$name} {
+      font-size: $size;
+    }
+    .p-#{$name} {
+      padding: $size;
+    }
+    .py-#{$name} {
+      padding-top: $size;
+      padding-bottom: $size;
+    }
+    .px-#{$name} {
+      padding-right: $size;
+      padding-left: $size;
+    }
+    .m-#{$name} {
+      margin: $size;
+    }
+    .my-#{$name} {
+      margin-top: $size;
+      margin-bottom: $size;
+    }
+    .mx-#{$name} {
+      margin-right: $size;
+      margin-left: $size;
+    }
+  }
+}
+@include sizes(
+  $xss: 0.3rem,
+  $sm: 0.5rem,
+  $xs: 0.75rem,
+  $base: 1rem,
+  $lg: 1.25rem,
+  $xl: 1.5rem,
+  $xxl: 2rem
+);
+
+@mixin sizes($args...) {
+  @each $name, $size in meta.keywords($args) {
+    .text-#{$name} {
+      font-size: $size;
+    }
+    .p-#{$name} {
+      padding: $size;
+    }
+    .py-#{$name} {
+      padding-top: $size !important;
+      padding-bottom: $size !important;
+    }
+    .px-#{$name} {
+      padding-right: $size;
+      padding-left: $size;
+    }
+    .m-#{$name} {
+      margin: $size;
+    }
+    .my-#{$name} {
+      margin-top: $size;
+      margin-bottom: $size;
+    }
+    .mb-#{$name} {
+      margin-bottom: $size;
+    }
+    .mt-#{$name} {
+      margin-top: $size;
+    }
+    .mx-#{$name} {
+      margin-right: $size;
+      margin-left: $size;
+    }
+  }
+}
+@include sizes(
+  $xss: 0.3rem,
+  $sm: 0.5rem,
+  $xs: 0.75rem,
+  $base: 1rem,
+  $lg: 1.25rem,
+  $xl: 1.5rem,
+  $xxl: 2rem
+);

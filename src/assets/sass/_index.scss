@@ -1,0 +1,10 @@
+@forward "./colors.scss";
+@forward "./fonts.scss";
+@forward "./base.scss";
+@forward "./sizes.scss";
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
