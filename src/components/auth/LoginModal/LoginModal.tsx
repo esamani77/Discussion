@@ -38,6 +38,7 @@ function LoginModal({ setShowModal, showModal }: IModalBase) {
         <p className="text-center mb-5">Please enter your name to continue.</p>
         <form className="my-xl">
           <div className="form-group flex flex-column">
+            <label htmlFor="nameInput">Name:</label>
             <input
               value={value}
               onChange={(e) => setValue(e.target.value)}

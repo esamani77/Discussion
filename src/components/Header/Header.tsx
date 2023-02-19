@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useUser } from "../../contex/user/userContext";
+import LoginModal from "../auth/LoginModal";
+import Avatar from "../Avatar";
 import "./header.scss";
 
 function Header() {
@@ -22,6 +24,13 @@ function Header() {
               <p className="flex">{state.name}</p>
               <p className="text-xs"> your comments: 4</p>
             </div>
+            <Avatar
+              className="rounded-full"
+              alt={state.name}
+              src={state.avatar}
+              width={48}
+              height={48}
+            />
           </div>
         ) : (
           <div
@@ -34,6 +43,12 @@ function Header() {
           </div>
         )}
       </nav>
+      {isLoginModalOpen && (
+        <LoginModal
+          showModal={isLoginModalOpen}
+          setShowModal={setIsLoginModalOpen}
+        />
+      )}
     </>
   );
 }
