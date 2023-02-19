@@ -12,18 +12,9 @@ const CommentInput = forwardRef<HTMLTextAreaElement, { commentId: number; tagDat
 		const [user] = useUser();
 		const [text, setText] = useState<string>("");
 
-		useEffect(() => {
-			console.log(
-				"%c tagData",
-				"background: #FFF; color: #000;padding: 0.25rem;border-radius: 5px",
-				tagData,
-			);
-			setText(tagData ?? "");
-		}, [tagData]);
-
 		const queryClient = useQueryClient();
 		const handleUpdate = () => {
-			if (commentId && text) {
+			if (commentId && text.trim() !== "") {
 				addCommnet({
 					commentId,
 					queryClient,

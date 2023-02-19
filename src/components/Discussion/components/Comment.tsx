@@ -69,6 +69,7 @@ export const Comment = (props: ICommentsProps) => {
 					</p>
 					{props.replies && (
 						<p
+							className="cursor-pointer "
 							onClick={() => {
 								handleAddReply("");
 							}}
