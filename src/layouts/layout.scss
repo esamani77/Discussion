@@ -1,0 +1,8 @@
+$heightvh: 10vh;
+
+.h-head {
+  height: $heightvh;
+}
+.h-remain {
+  height: calc(100vh - $heightvh);
+}
