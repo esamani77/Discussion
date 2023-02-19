@@ -7,7 +7,7 @@ import { useUser } from "../../../contex/user/userContext";
 import Avatar from "../../Avatar";
 import TextEditor from "../../TextEditor";
 
-const CommentInput = forwardRef<HTMLTextAreaElement, { commentId: number; tagData?: string }>(
+const CommentInput = forwardRef<HTMLTextAreaElement, { commentId?: number; tagData?: string }>(
 	({ commentId, tagData }, ref) => {
 		const [user] = useUser();
 		const [text, setText] = useState<string>("");

@@ -2,6 +2,9 @@
 
 This is a simple commenting app built with React, TypeScript, Vite-SWC, and React Query. The app allows users to leave comments and reply to existing comments and show reaction to them.
 
+## Demo
+You can see deployed website on https://esamani77.ir/
+
 ## Features
 
 - Users can add comments and reply to existing comments.
