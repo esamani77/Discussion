@@ -1,4 +1,10 @@
-export const CommentText = ({ text }: { text: string }) => {
+export const CommentText = ({
+	text,
+	onTagClicked,
+}: {
+	text: string;
+	onTagClicked: (val: string) => void;
+}) => {
 	const regex = /(@\w+)/g;
 	const splitText = text.split(regex);
 	const highlightedText = splitText.map((substring, index) => {
@@ -7,7 +13,7 @@ export const CommentText = ({ text }: { text: string }) => {
 				<span
 					key={index}
 					className="bg-primary bg-primarylight text-primary p-xss rounded-sm cursor-pointer "
-					onClick={() => console.log("FUCK U")}
+					onClick={() => onTagClicked(substring)}
 				>
 					{substring}
 				</span>

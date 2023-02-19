@@ -1,6 +1,7 @@
 import { useQueryClient } from "@tanstack/react-query";
 import { Like1 } from "iconsax-react";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { likeCommnet } from "../../../api";
 import { IComment, IDiscussion } from "../../../api/api.types";
 import { DefaultAvatar, Disscusion } from "../../../api/constants";
 import { useUser } from "../../../contex/user/userContext";
@@ -10,110 +11,86 @@ import CommentInput from "./CommentInput";
 import CommentText from "./CommentText";
 
 interface ICommentsProps extends IComment {
-  replies?: IComment[];
+	replies?: IComment[];
 }
 
 export const Comment = (props: ICommentsProps) => {
-  const hasReplies = props?.replies;
-  const [user] = useUser();
-  const queryClient = useQueryClient();
-  const [addReply, setAddReply] = useState(false);
-  const handleLikeComment = (date: number, id: number) => {
-    queryClient.setQueryData(
-      [Disscusion],
-      // ✅ this is the way
-      (oldData: IDiscussion[] | undefined) => {
-        if (oldData) {
-          const clonedDiscussion = structuredClone(oldData) as IDiscussion[];
-          const updatedDiscussion = clonedDiscussion.map((item) => {
-            if (item.date === date && item.id === id && !item.iLikedIt) {
-              return {
-                ...item,
-                iLikedIt: true,
-                likes: item.likes + 1,
-              };
-            }
-            if (item.replies && item.replies.length > 0) {
-              item.replies = item.replies.map((reply) => {
-                if (reply.date === date && reply.id === id && !reply.iLikedIt) {
-                  return {
-                    ...reply,
-                    iLikedIt: true,
-                    likes: reply.likes + 1,
-                  };
-                }
-                return reply;
-              });
-            }
-            return item;
-          });
+	const hasReplies = props?.replies;
+	const queryClient = useQueryClient();
 
-          return updatedDiscussion;
-        }
-      }
-    );
-  };
+	const [user] = useUser();
+	const [addReply, setAddReply] = useState(false);
+	const [tagData, setTagData] = useState("");
 
-  const ref = useRef<HTMLTextAreaElement>(null);
-  return (
-    <div className="flex gap-2  my-xs">
-      <Avatar
-        alt={props.user.name}
-        src={props.user?.avatar}
-        width={48}
-        height={48}
-        className="rounded-full"
-      />
-      <div className="flex gap-2 flex-col">
-        <div className="flex items-center gap-2">
-          <p className="text-base text-bold">{props.user.name}</p>
-          <small className="text-xs">{timeAgo(props.date)}</small>
-        </div>
-        <CommentText text={props.text} />
-        <div className="flex gap-2 items-center">
-          <p
-            className={`items-center flex gap-2 rounded-xs py-xss px-xs ${
-              props.iLikedIt ? "bg-primary" : "bg-light-gray"
-            }`}
-            onClick={() => handleLikeComment(props.date, props.id)}
-          >
-            <Like1
-              size={24}
-              color={props.iLikedIt ? "#FFF" : "gray"}
-              variant="Bold"
-            />
-            <span className={`${props.iLikedIt ? "text-white" : "text-black"}`}>
-              {props.likes}
-            </span>
-          </p>
-          {props.replies && (
-            <p
-              onClick={async () => {
-                if (hasReplies && hasReplies.length === 0) {
-                  setAddReply(true);
-                  await sleep(200);
-                }
-                ref.current && ref.current.focus();
-              }}
-            >
-              reply
-            </p>
-          )}
-        </div>
-        {hasReplies && hasReplies.length > 0 && (
-          <div className="border-l">
-            {hasReplies.map((reply) => {
-              return <Comment {...reply} key={reply.id} />;
-            })}
-            <CommentInput ref={ref} commentId={props.id} />
-          </div>
-        )}
-        {hasReplies && hasReplies.length === 0 && addReply && (
-          <CommentInput ref={ref} commentId={props.id} />
-        )}
-      </div>
-    </div>
-  );
+	const ref = useRef<HTMLTextAreaElement>(null);
+
+	const focusRef = () => {
+		ref.current && ref.current.focus();
+	};
+	const handleAddReply = async (val: string = "") => {
+		if (hasReplies && hasReplies.length === 0) {
+			setAddReply(true);
+			await sleep(200);
+		}
+		focusRef();
+	};
+
+	return (
+		<div className="flex gap-2  my-xs">
+			<Avatar
+				alt={props.user.name}
+				src={props.user?.avatar}
+				width={48}
+				height={48}
+				className="rounded-full"
+			/>
+			<div className="flex gap-2 flex-col">
+				<div className="flex items-center gap-2">
+					<p className="text-base text-bold">{props.user.name}</p>
+					<small className="text-xs">{timeAgo(props.date)}</small>
+				</div>
+				<CommentText text={props.text} onTagClicked={setTagData} />
+				<div className="flex gap-2 items-center">
+					<p
+						className={`items-center flex gap-2 rounded-xs py-xss px-xs ${
+							props.iLikedIt ? "bg-primary" : "bg-light-gray"
+						}`}
+						onClick={() =>
+							likeCommnet({
+								date: props.date,
+								id: props.id,
+								data: !props.iLikedIt,
+								queryClient: queryClient,
+							})
+						}
+					>
+						<Like1 size={24} color={props.iLikedIt ? "#FFF" : "gray"} variant="Bold" />
+						<span className={`${props.iLikedIt ? "text-white" : "text-black"}`}>{props.likes}</span>
+					</p>
+					{props.replies && (
+						<p
+							onClick={() => {
+								handleAddReply("");
+							}}
+						>
+							reply
+						</p>
+					)}
+				</div>
+				{hasReplies && hasReplies.length > 0 && (
+					<div className="border-l">
+						{hasReplies.map((reply) => {
+							return <Comment {...reply} key={reply.id} />;
+						})}
+						<CommentInput tagData={tagData} ref={ref} commentId={props.id} />
+					</div>
+				)}
+				{hasReplies && hasReplies.length === 0 && addReply && (
+					<CommentInput ref={ref} commentId={props.id} />
+				)}
+			</div>
+		</div>
+	);
 };
 
 export default Comment;

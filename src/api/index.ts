@@ -1,6 +1,6 @@
 import { sleep } from "../utils";
 import { discussions } from "./mockData";
-import { QueryClient, useQuery } from "@tanstack/react-query";
+import { QueryClient, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Disscusion } from "./constants";
 import { IComment, IDiscussion } from "./api.types";
 
@@ -82,6 +82,52 @@ export const updateCommnet = ({
 						},
 				  ]
 				: oldData;
+		},
+	);
+};
+
+export const likeCommnet = ({
+	date,
+	id,
+	data,
+	queryClient,
+}: {
+	date: number;
+	id: number;
+	data: boolean;
+	queryClient: QueryClient;
+}) => {
+	queryClient.setQueryData(
+		[Disscusion],
+		// ✅ this is the way
+		(oldData: IDiscussion[] | undefined) => {
+			if (oldData) {
+				const clonedDiscussion = structuredClone(oldData) as IDiscussion[];
+				const updatedDiscussion = clonedDiscussion.map((item) => {
+					if (item.date === date && item.id === id) {
+						return {
+							...item,
+							iLikedIt: data,
+							likes: item.likes + (data ? 1 : -1),
+						};
+					}
+					if (item.replies && item.replies.length > 0) {
+						item.replies = item.replies.map((reply) => {
+							if (reply.date === date && reply.id === id) {
+								return {
+									...reply,
+									iLikedIt: data,
+									likes: reply.likes + (data ? 1 : -1),
+								};
+							}
+							return reply;
+						});
+					}
+					return item;
+				});
+
+				return updatedDiscussion;
+			}
 		},
 	);
 };
