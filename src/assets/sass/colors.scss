@@ -1,10 +1,14 @@
 @use "sass:meta";
 
 $danger: #cf0000;
+$light-red: #f19e9e;
 $gray: #434343;
+$light-gray: #d0d0d0;
+$light-gray-5: #1e1e1ee6;
 $black: #000000;
 $white: #ffffff;
 $primary: #2929ff;
+$primarylight: #769de4f8;
 
 @mixin syntax-colors($args...) {
   @debug meta.keywords($args);
@@ -25,6 +29,8 @@ $primary: #2929ff;
 @include syntax-colors(
   $danger: #cf0000,
   $gray: #808080,
+  $light-gray: #d0d0d0,
+  $light-gray-5: #1e1e1ee6,
   $black: #000000,
   $white: #ffffff,
   $primary: #2929ff,

@@ -27,6 +27,12 @@
       margin-right: $size;
       margin-left: $size;
     }
+    .rounded-#{$name} {
+      border-radius: $size;
+    }
+    .w-#{$name} {
+      width: $size;
+    }
   }
 }
 @include sizes(
@@ -72,6 +78,15 @@
       margin-right: $size;
       margin-left: $size;
     }
+    .rounded-#{$name} {
+      border-radius: $size;
+    }
+    .w-#{$name} {
+      width: $size;
+    }
+    .h-#{$name} {
+      height: $size;
+    }
   }
 }
 @include sizes(
@@ -81,5 +96,9 @@
   $base: 1rem,
   $lg: 1.25rem,
   $xl: 1.5rem,
-  $xxl: 2rem
+  $xxl: 2rem,
+  $full: 100%,
+  $quarter1: 25%,
+  $quarter3: 75%,
+  $half: 50%
 );

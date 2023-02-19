@@ -1,0 +1,14 @@
+@use "./../../assets/sass/index" as *;
+
+.modal {
+  width: 100vw;
+  height: 100vh;
+  background-color: $light-gray-5;
+
+  .modal-body {
+    background-color: $light-gray;
+    z-index: 99;
+    width: 50%;
+    height: 75%;
+  }
+}
