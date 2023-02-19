@@ -23,7 +23,7 @@ const CommentInput = forwardRef<HTMLTextAreaElement, { commentId: number; tagDat
 
 		const queryClient = useQueryClient();
 		const handleUpdate = () => {
-			if (commentId) {
+			if (commentId && text) {
 				addCommnet({
 					commentId,
 					queryClient,
@@ -32,7 +32,7 @@ const CommentInput = forwardRef<HTMLTextAreaElement, { commentId: number; tagDat
 						user,
 					},
 				});
-			} else {
+			} else if (text) {
 				updateCommnet({ comment: { text, user }, queryClient });
 			}
 			setText("");
